@@ -2,7 +2,7 @@
 title: Wyatt's Blog
 email: wkellett@wustl.edu
 description: >-
-  Student at Washington University in St. Louis, majoring in Computer Science and Applied Mathematics. I try to explain some of my solutions here.
+  Student at Washington University in St. Louis, majoring in CS and Applied Math. I try to explain some of my solutions here.
 baseurl: ""
 url: "http://wyatt00.github.io"
 twitter_username: wyattkellett
@@ -10,6 +10,7 @@ instagram_username: wyattkellett
 github_username: wyatt00
 
 # Build settings
+show_downloads: true
 theme: jekyll-theme-architect
 plugins:
   - jekyll-feed
