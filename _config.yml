@@ -10,7 +10,7 @@ instagram_username: wyattkellett
 github_username: wyatt00
 
 # Build settings
-show_downloads: true
+show_downloads: false
 theme: jekyll-theme-architect
 plugins:
   - jekyll-feed
