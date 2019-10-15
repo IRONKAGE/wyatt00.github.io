@@ -7,8 +7,8 @@ title: "Home"
 <h2>{{ category[0] }}</h3>
 <ul>
   {% for post in category[1] %}
-  <li>
-    <h3><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h3>
+  <li style = 'list-style-type: none;'>
+    <h3 style = 'margin-bottom: 1%;'><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h3>
     <span>{{ post.date | date: "%b %-d, %Y" }}</span>
     <br />
     {{ post.excerpt }}
