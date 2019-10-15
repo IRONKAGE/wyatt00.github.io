@@ -1,0 +1,18 @@
+---
+layout: default
+title: "Home"
+---
+
+{% for category in site.categories %}
+<h3>{{ category[0] }}</h3>
+<ul>
+  {% for post in category[1] %}
+  <li>
+    <span>{{ post.date | date: "%b %-d, %Y" }}</span>
+    <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+    <br />
+    {{ post.excerpt }}
+  </li>
+  {% endfor %}
+</ul>
+{% endfor %}
