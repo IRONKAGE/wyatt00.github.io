@@ -9,6 +9,7 @@ title: "Home"
   {% for post in category[1] %}
   <li>
     <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+    <br />
     <span>{{ post.date | date: "%b %-d, %Y" }}</span>
     <br />
     {{ post.excerpt }}
