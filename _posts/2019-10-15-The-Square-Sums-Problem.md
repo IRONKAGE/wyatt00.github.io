@@ -18,7 +18,7 @@ I recently encountered a problem in CodeWars that took some time to figure out, 
 
 ### Description from CodeWars
 
-Write a function 'square sums' that, given an integer number _N_ (in range 2..1000), returns array of integers 1.._N_ arranged in a way, so sum of each 2 consecutive numbers is a square.
+Write a function 'square sums' that, given an integer number _N_ (in range 2..1000), returns an array of integers 1.._N_ arranged in a way, so the sum of each 2 consecutive numbers is a square.
 
 **Solution is valid if and only if following two criteria are met:**
 
@@ -41,8 +41,8 @@ For _N_ = 15 solution could look like this:
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\\+/ &nbsp;&nbsp;&nbsp;&nbsp;\\+/ &nbsp;&nbsp;&nbsp;&nbsp;\\+/ &nbsp;&nbsp;&nbsp;&nbsp;\\+/ &nbsp;&nbsp;&nbsp;&nbsp;\\+/ &nbsp;&nbsp;&nbsp;&nbsp;\\+/ &nbsp;&nbsp;&nbsp;&nbsp;\\+/  
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;25&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;25&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;25&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9
 
-  9 = 3*3  
-   16 = 4*4  
+  9 = 3\*3  
+   16 = 4\*4  
    25 = 5\*5
 
 If there is no solution, return False. For example if _N_ = 5, then numbers 1,2,3,4,5 cannot be put into square sums row: 1 + 3 = 4, 4 + 5 = 9, but 2 has no pairs and cannot link [1,3] and [4,5]
@@ -77,7 +77,7 @@ def square_sums(num):
     return False
 ```
 
-Basically, we are creating a list of all permutations of numbers in a range from 1 to _N_, and then iterating through each permutation to see if it follows the 'square sums' rule. If it does, return that specific instance. If none do, we return False.
+> Basically, we are creating a list of all permutations of numbers in a range from 1 to _N_, and then iterating through each permutation to see if it follows the 'square sums' rule. If it does, return that specific instance. If none do, we return False.
 
 The code is short and sweet! However, we can quickly see that this approach has some problems:
 
@@ -106,7 +106,7 @@ Now here's the thing with this strategy: _not every starting point works._ For i
 
 This begs a few questions: Are some numbers more important than others when solving this problem? What about **sequences** of numbers?
 
-Here's an idea: let's represent this problem as a graph, with the numbers 1-_N_ as vertices, and edges between numbers existing _only if they add up to a square_. This way, we are determining the list of numbers that can 'pair up' with another number. If we draw out this graph, we can definitively see that some numbers are more important than others when attacking this problem. We might also make a breakthrough as well!
+Here's an idea: let's represent this problem as a graph, with the numbers 1 - _N_ as vertices, and edges between numbers existing _only if they add up to a square_. This way, we are determining the list of numbers that can 'pair up' with another number. If we draw out this graph, we can definitively see that some numbers are more important than others when attacking this problem. We might also make a breakthrough as well!
 
 Let's test the idea first. Here's the graph for _N_ = 9:
 
