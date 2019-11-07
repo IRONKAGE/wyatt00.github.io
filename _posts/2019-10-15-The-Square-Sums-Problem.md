@@ -88,11 +88,11 @@ Both of these points have one thing in common: It is **costly** in terms of time
 
 I tried running this code with a small value of 15, and it still timed out! However, that makes a ton of sense:
 
-![15!]({{ site.url }}assets/square_sums/images/15.png "15!")
+![15!](/assets/square_sums/images/15.png "15!")
 
 We would have to go through **that** many sequences just to find a single path, and this is just for N = _15_! For this problem, we need to accept values up to 1000, and run over 200 tests in less than 12 seconds. Seems daunting with our solution now. And as a friendly reminder:
 
-![1000!]({{ site.url }}assets/square_sums/images/1000.png "1000!")
+![1000!](/assets/square_sums/images/1000.png "1000!")
 
 ## Thinking about the Problem Differently
 
@@ -110,13 +110,13 @@ Here's an idea: let's represent this problem as a graph, with the numbers 1-_N_ 
 
 Let's test the idea first. Here's the graph for _N_ = 9:
 
-![Graph for N=9]({{ site.url }}assets/square_sums/images/graph9.png "Graph for N=9")
+![Graph for N=9](/assets/square_sums/images/graph9.png "Graph for N=9")
 
 The graph visualizes the problem very well! 1 connects to 3 but also to 8; 3 connects to 1 but also to 6; etc. We can **also** see that 9 doesn't work for this problem because we cannot connect all of the numbers together in one path.
 
 Sweet! Now lets try a slightly bigger number. Here's the graph for _N_ = 15:
 
-![Graph for N=15]({{ site.url }}assets/square_sums/images/graph15.png "Graph for N=15")
+![Graph for N=15](/assets/square_sums/images/graph15.png "Graph for N=15")
 
 We can see that _N_ = 15 works with only a single path! No longer do we have to sort through hundreds of millions of permutations- we can now just follow the edges between numbers to construct a path.
 
@@ -199,7 +199,8 @@ So.... we're done, right? Well, not really. This solution may be much faster, bu
 | 40  |  1000  |             0.787779116778 |
 | 50  |   10   |             302.9348414185 |
 
-\
+<br/>
+
 Yes, it literally took 302 seconds to compute _N_ = 50.
 
 I snubbed the number of trials for _N_ = 50 because it would have taken a stupid amount of time. Regardless, as _N_ increases, the average time it takes to solve the square sums problem increases seemingly exponentially. The > 200 tests would fail if we were testing up to _N_ = 50 according to these results, not to mention our task of _N_ = 1000. So, why is it taking this long to begin with? What's with the discrepancy between _N_?
@@ -208,13 +209,13 @@ As I mentioned in the code explanation, we are using a brute-force approach to g
 
 Take the graph of _N_ = 15, from above:
 
-![Graph for N=15]({{ site.url }}assets/square_sums/images/graph15.png "Graph for N=15")
+![Graph for N=15](/assets/square_sums/images/graph15.png "Graph for N=15")
 
 When you start from vertices 8 or 9, there are only two paths you can choose from! For example, when starting at the 8, the only decision we have to make is to go to the 3 or 15 from the 1. This makes finding the solution very fast. In addition, if we choose vertex 1 to start, we only have to check three paths. In other words, if we choose the incorrect vertex, we won't be dealing with that error for very long.
 
 Now take the graph of _N_ = 50:
 
-![Graph for N=50]({{ site.url }}assets/square_sums/images/graph50.png "Graph for N=50")
+![Graph for N=50](/assets/square_sums/images/graph50.png "Graph for N=50")
 
 As _N_ gets bigger, we can see that the number of decisions we have to make dramatically increases, whether that is starting at a specific vertex, or moving to a specific vertex from another. That is, the number of available paths exponentially increases as _N_ increases. We cannot go through every possible path if we wish to tackle the _N_ = 1000 problem. Much like the permutation idea, brute force does not work forever.
 
@@ -234,7 +235,7 @@ The problem is, the real bulk of the computation is done when _deciding_ on whic
 
 We will look at one last graph to confirm. Lets look at _N_ = 25:
 
-![Graph for N=25]({{ site.url }}assets/square_sums/images/graph25.png "Graph for N=25")
+![Graph for N=25](/assets/square_sums/images/graph25.png "Graph for N=25")
 
 We will start at 18 (this number only has one connection) and will move on to 7 (since we have no other options). From here, we will choose 9 instead of 2, because 9 has one other adjacent node while 2 has two others. Repeat this decision pattern until you reach the end!
 
@@ -310,7 +311,8 @@ Now let's test the performance!
 | 500  |  1000  |              0.02462741449 |
 | 1000 |  1000  |        0.10473925598099999 |
 
-\
+<br/>
+
 This is **significantly** better than the brute force algorithm we were working with earlier! Right now, we are dealing with a worst case, .105s average runtime speed, which is incredibly fast! I can almost see the green check mark for the 1 Kyu Problem :D
 
 ### Speeding Up Graph Creation
@@ -329,7 +331,8 @@ Unfortunately, CodeWars wants the solution to be _slightly_ faster, so we need t
 | 500  |  1000  |                       0.01804599503 |          0.02462741449 |
 | 1000 |  1000  |                 0.07171780046899999 |    0.10473925598099999 |
 
-\
+<br/>
+
 At the top of my head, I couldn't think of an algorithmically faster way to create the graph. I needed to check, for each vertex, if adding the vertex to each of the other vertices would yield a square number. No getting around that obstacle.
 
 What I did know was that I only needed, at worst case, a graph for _N_ = 1000. So instead of creating a graph for _N_ = 1000, I would hard code the graph, and exclude any values I didn't need. For example, if _N_ = 100, I would take my hard coded graph of _N_ = 1000, and would exclude all vertices from _101_ to _1000_. Additionally, I would remove all adjacent nodes from _101_ to _1000_ from the vertices that I kept in the graph. This was the final push I needed to solve this problem.
@@ -390,7 +393,8 @@ def create_graph(num):
 | 500  |  1000  |             0.007946864877 |
 | 1000 |  1000  |             0.031307859218 |
 
-\
+<br/>
+
 In comparison, the final product is much better for higher values of _N_ and slightly worse for lower values.
 
 ## Special Thanks
