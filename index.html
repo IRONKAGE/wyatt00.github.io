@@ -4,12 +4,16 @@ title: "Home"
 ---
 
 {% for category in site.categories %}
-<h2>{{ category[0] }}</h3>
+<h2>{{ category[0] }}</h2>
 <ul>
   {% for post in category[1] %}
-  <li style = 'list-style-type: none;'>
-    <h3 style = 'margin-bottom: 0%;'><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h3>
-    <span style = 'font-style: italic;'>{{ post.date | date: "%b %-d, %Y" }}</span>
+  <li style="list-style-type: none;">
+    <h3 style="margin-bottom: 0%;">
+      <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+    </h3>
+    <span style="font-style: italic;">{{
+      post.date | date: "%b %-d, %Y"
+    }}</span>
     <br />
     {{ post.excerpt }}
   </li>
